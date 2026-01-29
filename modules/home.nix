@@ -71,6 +71,13 @@ in
     # EDITOR = "emacs";
   };
 
+  programs.ssh = {
+    enable = true;
+    extraConfig = pkgs.lib.mkBefore ''
+    PKCS11Provider=${pkgs.yubico-piv-tool}/lib/libykcs11.so
+    '';
+  };
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -112,6 +119,7 @@ in
         format = gpgFormat;
         ssh.allowedSignersFile = allowedSigners;
       };
+      commit.gpgsign = true;
     };
   };
 

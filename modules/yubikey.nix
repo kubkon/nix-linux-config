@@ -24,10 +24,4 @@
   environment.shellInit = ''
     gpg-connect-agent /bye
   '';
-
-  programs.ssh = {
-    extraConfig = lib.mkBefore ''
-    PKCS11Provider=${pkgs.yubico-piv-tool}/lib/libykcs11.so
-    '';
-  };
 }
