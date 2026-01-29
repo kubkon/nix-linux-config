@@ -87,7 +87,7 @@ in
     enable = true;
     enableFishIntegration = true;
     settings = {
-      font-size = 12; 
+      font-size = 11;
       background = "282828";
       foreground = "dedede";
       keybind = [
@@ -114,6 +114,7 @@ in
         name = userName;
         email = userEmail;
       };
+      gpg.ssh.allowedSignersFile = allowedSigners;
     };
     signing = {
       format = "ssh";
