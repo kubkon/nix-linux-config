@@ -113,13 +113,12 @@ in
       user = {
         name = userName;
         email = userEmail;
-        signingKey = signingKey;
       };
-      gpg = {
-        format = gpgFormat;
-        ssh.allowedSignersFile = allowedSigners;
-      };
-      commit.gpgsign = true;
+    };
+    signing = {
+      format = "ssh";
+      key = signingKey;
+      signByDefault = true;
     };
   };
 
