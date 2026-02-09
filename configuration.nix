@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, zed-nightly, tracy, ... }:
+{ config, pkgs, lib, zed-nightly, tracy, ... }:
 
 {
   imports =
@@ -23,6 +23,30 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Disable power-profiles-daemon (conflicts with auto-cpufreq)
+  services.power-profiles-daemon.enable = false;
+
+  # Power saving and management
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+      governor = "powersave";
+      turbo = "never";
+    };
+    charger = {
+      governor = "performance";
+      turbo = "auto";
+    };
+  };
+
+  # Enable graphics
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   networking.hostName = "ichimaru"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -100,12 +124,25 @@
   services.fwupd.enable = true;
   services.fprintd.enable = true;
 
+  security.pam.services = {
+    sudo.fprintAuth = true; # Enable fingerprint for sudo
+    su.fprintAuth = true; # Enable fingerprint for su
+    sddm.fprintAuth = false; # Keep for SDDM
+    login.fprintAuth = false; # Keep for login
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kubkon = {
     isNormalUser = true;
     useDefaultShell = true;
     description = "Jakub Konka";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
     packages = with pkgs; [
     ];
   };

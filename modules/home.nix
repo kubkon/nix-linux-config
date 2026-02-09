@@ -87,7 +87,7 @@ in
     enable = true;
     enableFishIntegration = true;
     settings = {
-      font-size = 11;
+      font-size = 10;
       background = "282828";
       foreground = "dedede";
       keybind = [
@@ -139,7 +139,6 @@ in
       git.sign-on-push = true;
       ui = {
         editor = "hx";
-        paginate = "never";
       };
     };
   };
