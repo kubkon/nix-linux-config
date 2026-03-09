@@ -142,16 +142,18 @@
     isNormalUser = true;
     useDefaultShell = true;
     description = "Jakub Konka";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" ];
     packages = with pkgs; [
     ];
   };
+  users.groups.libvirtd.members = ["kubkon"];
   users.defaultUserShell = pkgs.fish;
 
   # Install firefox.
   programs.firefox.enable = true;
   programs.thunderbird.enable = true;
   programs.fish.enable = true;
+  programs.virt-manager.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -173,6 +175,9 @@
     EDITOR = "hx";
     CARGO_BUILD_JOBS = 12;
   };
+
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   fonts.packages = with pkgs; [
     noto-fonts

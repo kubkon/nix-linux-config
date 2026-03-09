@@ -2,7 +2,7 @@
   description = "flake for ichimaru";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager/master";
     zed-nightly.url = "github:zed-industries/zed";
