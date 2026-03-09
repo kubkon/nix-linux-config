@@ -165,8 +165,14 @@
      zed-nightly.packages.${system}.default
      tracy.packages.${system}.default
      gnomeExtensions.appindicator
+     perf
+     samply
+     mold
   ];
-  environment.variables.EDITOR = "hx";
+  environment.variables = {
+    EDITOR = "hx";
+    CARGO_BUILD_JOBS = 12;
+  };
 
   fonts.packages = with pkgs; [
     noto-fonts
