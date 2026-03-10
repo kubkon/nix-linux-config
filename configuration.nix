@@ -170,6 +170,7 @@
      perf
      samply
      mold
+     sentry-cli
   ];
   environment.variables = {
     EDITOR = "hx";
