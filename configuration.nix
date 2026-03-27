@@ -81,24 +81,10 @@
     LC_TIME = "pl_PL.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  programs.niri.enable = true;
+  niri-flake.cache.enable = false;
+  stylix.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.desktopManager.gnome.extraGSettingsOverrides = ''
-    [org.gnome.mutter]
-    experimental-features=['scale-monitor-framebuffer', 'xwayland-native-scaling']
-  '';
-  services.gnome.gnome-settings-daemon.enable = true;
-  programs.dconf.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "colemak";
-  };
   services.udev.extraHwdb = ''
     evdev:input:b0011v0001p0001eAB83*
       KEYBOARD_KEY_3a=esc
@@ -115,12 +101,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -154,7 +134,6 @@
   users.groups.libvirtd.members = ["kubkon"];
   users.defaultUserShell = pkgs.fish;
 
-  # Install firefox.
   programs.firefox.enable = true;
   programs.thunderbird.enable = true;
   programs.fish.enable = true;

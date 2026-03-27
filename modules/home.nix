@@ -34,6 +34,7 @@ in
     fzf
     fishPlugins.grc
     grc
+    swaybg
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -70,6 +71,35 @@ in
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+
+  programs.niri.settings = {
+    input.keyboard.xkb = {
+      layout = "us,us";
+      variant = "colemak,qwerty";
+      options = "grp:win_space_toggle";
+    };
+    input.touchpad = {
+      tap = true;
+      natural-scroll = true;
+    };
+
+    outputs = {
+      "eDP-1".scale = 2.0;
+      "DP-2".scale = 1.5;
+    };
+  };
+
+  programs.waybar = {
+    enable = true;
+    settings.mainBar.layer = "top";
+    systemd.enable = true;
+  };
+  programs.fuzzel.enable = true;
+  programs.swaylock.enable = true;
+
+  services.mako.enable = true;
+  services.swayidle.enable = true;
+  services.polkit-gnome.enable = true;
 
   programs.ssh = {
     enable = true;
@@ -142,7 +172,7 @@ in
       };
     };
   };
-  
+
   programs.helix = {
     enable = true;
     defaultEditor = true;

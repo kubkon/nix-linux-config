@@ -7,9 +7,14 @@
     home-manager.url = "github:nix-community/home-manager/master";
     zed-nightly.url = "github:zed-industries/zed";
     tracy.url = "github:kubkon/tracy.nix";
+    niri.url = "github:sodiboo/niri-flake";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, zed-nightly, tracy }: {
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, zed-nightly, tracy, niri, stylix }: {
     nixosConfigurations."ichimaru" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
@@ -26,6 +31,8 @@
           home-manager.useUserPackages = true;
           home-manager.users.kubkon = import ./modules/home.nix;
         }
+        niri.nixosModules.niri
+        stylix.nixosModules.stylix
       ];
     };
   };
