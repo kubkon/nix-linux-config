@@ -24,6 +24,11 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "riscv64-linux"
+  ];
+
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # Disable power-profiles-daemon (conflicts with auto-cpufreq)
@@ -171,6 +176,7 @@
      samply
      mold
      sentry-cli
+     qemu
   ];
   environment.variables = {
     EDITOR = "hx";
@@ -185,6 +191,7 @@
     noto-fonts-cjk-sans
     noto-fonts-color-emoji
   ];
+  fonts.fontconfig.useEmbeddedBitmaps = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
