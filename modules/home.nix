@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   userName = "Jakub Konka";
@@ -74,23 +74,36 @@ in
   programs.niri.settings = {
     spawn-at-startup = [
       { command = ["mako"]; }
+      { command = [ "${lib.getExe pkgs.networkmanagerapplet}" ]; }
     ];
     binds = {
       "Mod+D".action.spawn = "fuzzel";
-      "Mod+T".action.spawn = "ghostty";
+      "Mod+Return".action.spawn = "ghostty";
       "Mod+Q".action.close-window = [];
       "Mod+Shift+E".action.quit = [];
+      "Mod+L".action.spawn = [
+        "sh"
+        "-c"
+        "loginctl lock-session && sleep 5 && niri msg action power-off-monitors"
+      ];
     };
-    input.keyboard.xkb = {
-      layout = "us,us";
-      variant = "colemak,";
-      options = "grp:win_space_toggle";
-    };
-    input.touchpad = {
-      tap = true;
-      natural-scroll = true;
+    input = {
+      focus-follows-mouse = {
+        enable = true;
+        max-scroll-amount = "0%";
+      };
+      keyboard.xkb = {
+        layout = "us,us";
+        variant = "colemak,";
+        options = "grp:win_space_toggle";
+      };
+      touchpad = {
+        tap = true;
+        natural-scroll = true;
+      };
     };
     layout = {
+      shadow.enable = true;
       gaps = 8;
       focus-ring.enable = true;
     };
@@ -136,12 +149,93 @@ in
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    # settings.main = {
-    #   modules-right = [
-    #     "battery"
-    #     "clock"
-    #   ];
-    # };
+    settings.main = {
+      modules-left = [
+        "niri/workspaces"
+      ];
+      modules-center = [
+        "niri/window"
+      ];
+      modules-right = [
+        "pulseaudio"
+        "battery"
+        "tray"
+        "clock"
+      ];
+      "niri/workspaces" = {
+        format = "{icon} {value}";
+        format-icons = {
+          active = "";
+          default = "";
+        };
+      };
+      "niri/window" = {
+        icon = true;
+      };
+      clock = {
+        tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        format-alt =  "{:%Y-%m-%d}";
+      };
+      pulseaudio = {
+        format = "{icon}";
+        format-bluetooth = "{icon} ";
+        format-muted = "󰝟";
+        format-icons = {
+          headphone = "";
+          default = [
+            ""
+            ""
+          ];
+        };
+        scroll-step = 1;
+        on-click = "pavucontrol";
+      };
+      tray = {
+        icon-size = 21;
+        spacing = 10;
+      };
+      battery = {
+        format = "{icon}";
+
+        format-icons = [
+          "󰁺"
+          "󰁻"
+          "󰁼"
+          "󰁽"
+          "󰁾"
+          "󰁿"
+          "󰂀"
+          "󰂁"
+          "󰂂"
+          "󰁹"
+        ];
+        states = {
+          battery-10 = 10;
+          battery-20 = 20;
+          battery-30 = 30;
+          battery-40 = 40;
+          battery-50 = 50;
+          battery-60 = 60;
+          battery-70 = 70;
+          battery-80 = 80;
+          battery-90 = 90;
+          battery-100 = 100;
+        };
+
+        format-plugged = "󰚥";
+        format-charging-battery-10 = "󰢜";
+        format-charging-battery-20 = "󰂆";
+        format-charging-battery-30 = "󰂇";
+        format-charging-battery-40 = "󰂈";
+        format-charging-battery-50 = "󰢝";
+        format-charging-battery-60 = "󰂉";
+        format-charging-battery-70 = "󰢞";
+        format-charging-battery-80 = "󰂊";
+        format-charging-battery-90 = "󰂋";
+        format-charging-battery-100 = "󰂅";
+        tooltip-format = "{capacity}% {timeTo}";
+      };
+    };
   };
   programs.fuzzel.enable = true;
   programs.swaylock.enable = true;
@@ -327,6 +421,8 @@ in
       };
     };
   };
+
+  services.network-manager-applet.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

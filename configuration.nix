@@ -172,6 +172,7 @@
     nssmdns4 = true;
     openFirewall = true;
   };
+  services.dbus.packages = [ pkgs.nautilus ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kubkon = {
@@ -207,6 +208,7 @@
      mold
      sentry-cli
      qemu
+     pavucontrol
   ];
   environment.variables = {
     EDITOR = "hx";
