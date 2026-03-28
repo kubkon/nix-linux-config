@@ -30,6 +30,19 @@
   ];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+        FastConnectable = true;
+      };
+      Policy = {
+        AutoEnable = true;
+      };
+    };
+  };
 
   # Disable power-profiles-daemon (conflicts with auto-cpufreq)
   services.power-profiles-daemon.enable = false;
@@ -81,9 +94,43 @@
     LC_TIME = "pl_PL.UTF-8";
   };
 
-  programs.niri.enable = true;
-  niri-flake.cache.enable = false;
-  stylix.enable = true;
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
+  niri-flake.cache.enable = true;
+
+  stylix = {
+    enable = true;
+    autoEnable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+
+    fonts = {
+      serif = {
+        package = pkgs.nerd-fonts.monaspace;
+        name = "MonaspiceXe Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.nerd-fonts.monaspace;
+        name = "MonaspiceNe Nerd Font";
+      };
+      monospace = {
+        package = pkgs.nerd-fonts.monaspace;
+        name = "MonaspiceKr Nerd Font";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-color-emoji;
+        name = "Noto Color Emoji";
+      };
+
+      sizes = {
+        applications = 11;
+        terminal = 11;
+        popups = 11;
+        desktop = 11;
+      };
+    };
+  };
 
   services.udev.extraHwdb = ''
     evdev:input:b0011v0001p0001eAB83*
@@ -102,6 +149,10 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  services.displayManager.gdm.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.polkit.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -169,6 +220,10 @@
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-color-emoji
+    font-awesome
+    source-code-pro
+    powerline-fonts
+    nerd-fonts.monaspace
   ];
   fonts.fontconfig.useEmbeddedBitmaps = true;
 

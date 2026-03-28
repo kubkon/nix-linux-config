@@ -34,7 +34,6 @@ in
     fzf
     fishPlugins.grc
     grc
-    swaybg
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -178,7 +177,6 @@ in
     defaultEditor = true;
 
     settings = {
-      theme = "tokyonight";
       editor = {
         cursor-shape = {
           normal = "block";

@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, zed-nightly, tracy, niri, stylix }: {
+  outputs = inputs@{ self, nixpkgs, nixos-hardware, home-manager, zed-nightly, tracy, niri, stylix }: {
     nixosConfigurations."ichimaru" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
@@ -24,14 +24,20 @@
 
       modules = [
         ./configuration.nix
+        ({ nixpkgs.overlays = [ niri.overlays.niri ]; })
         nixos-hardware.nixosModules.framework-amd-ai-300-series
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.kubkon = import ./modules/home.nix;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          # home-manager.sharedModules = [ niri.nixosModules.niri ];
         }
         niri.nixosModules.niri
+        {
+          nixpkgs.overlays = [ niri.overlays.niri ];
+        }
         stylix.nixosModules.stylix
       ];
     };
