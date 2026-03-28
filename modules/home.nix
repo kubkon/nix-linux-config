@@ -72,26 +72,76 @@ in
   };
 
   programs.niri.settings = {
+    spawn-at-startup = [
+      { command = ["mako"]; }
+    ];
+    binds = {
+      "Mod+D".action.spawn = "fuzzel";
+      "Mod+T".action.spawn = "ghostty";
+      "Mod+Q".action.close-window = [];
+      "Mod+Shift+E".action.quit = [];
+    };
     input.keyboard.xkb = {
       layout = "us,us";
-      variant = "colemak,qwerty";
+      variant = "colemak,";
       options = "grp:win_space_toggle";
     };
     input.touchpad = {
       tap = true;
       natural-scroll = true;
     };
-
+    layout = {
+      gaps = 8;
+      focus-ring.enable = true;
+    };
     outputs = {
       "eDP-1".scale = 2.0;
       "DP-2".scale = 1.5;
+    };
+    prefer-no-csd = true;
+  };
+
+  stylix = {
+    enable = true;
+    autoEnable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+
+    fonts = {
+      serif = {
+        package = pkgs.nerd-fonts.monaspace;
+        name = "MonaspiceXe Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.nerd-fonts.monaspace;
+        name = "MonaspiceNe Nerd Font";
+      };
+      monospace = {
+        package = pkgs.nerd-fonts.monaspace;
+        name = "MonaspiceKr Nerd Font";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-color-emoji;
+        name = "Noto Color Emoji";
+      };
+
+      sizes = {
+        applications = 11;
+        terminal = 11;
+        popups = 11;
+        desktop = 11;
+      };
     };
   };
 
   programs.waybar = {
     enable = true;
-    settings.mainBar.layer = "top";
     systemd.enable = true;
+    # settings.main = {
+    #   modules-right = [
+    #     "battery"
+    #     "clock"
+    #   ];
+    # };
   };
   programs.fuzzel.enable = true;
   programs.swaylock.enable = true;
