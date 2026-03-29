@@ -165,24 +165,19 @@
     lidSwitchDocked = "ignore";
   };
 
-  # security.pam.services = {
-  #   sudo.fprintAuth = true; # Enable fingerprint for sudo
-  #   su.fprintAuth = true; # Enable fingerprint for su
-  #   sddm.fprintAuth = false; # Keep for SDDM
-  #   login.fprintAuth = false; # Keep for login
-
-  #   # Workaround for: https://github.com/swaywm/swaylock/issues/61#issuecomment-965175390
-  #   swaylock = {
-  #     fprintAuth = false;
-  #   };
-  # };
-
   services.avahi = {
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
   };
   services.dbus.packages = [ pkgs.nautilus ];
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config.common.default = "*";
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kubkon = {
