@@ -35,6 +35,7 @@ in
     fishPlugins.grc
     grc
     networkmanagerapplet
+    swaynotificationcenter
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -158,11 +159,20 @@ in
         "niri/window"
       ];
       modules-right = [
+        "idle_inhibitor"
         "pulseaudio"
         "battery"
+        "custom/notification"
         "tray"
         "clock"
       ];
+      idle_inhibitor = {
+        format = "{icon} ";
+        format-icons = {
+          activated = "";
+          deactivated = "";
+        };
+      };
       "niri/workspaces" = {
         format = "{icon} {value}";
         format-icons = {
@@ -178,8 +188,8 @@ in
         format-alt =  "{:%Y-%m-%d}";
       };
       pulseaudio = {
-        format = "{icon}";
-        format-bluetooth = "{icon} ";
+        format = "{icon} ";
+        format-bluetooth = "{icon}  ";
         format-muted = "󰝟";
         format-icons = {
           headphone = "";
@@ -196,7 +206,7 @@ in
         spacing = 10;
       };
       battery = {
-        format = "{icon}";
+        format = "{icon}  ";
 
         format-icons = [
           "󰁺"
@@ -236,14 +246,31 @@ in
         format-charging-battery-100 = "󰂅";
         tooltip-format = "{capacity}% {timeTo}";
       };
+      "custom/notification" = {
+        format = " {icon}  {text} ";
+        tooltip-format = "Left: Open Notification Center\nRight: Toggle Do not Disturb\nMiddle: Clear Notifications";
+        format-icons = {
+          notification = "<span foreground='red'><sup></sup></span>";
+          none = "";
+          dnd-notification = "<span foreground='red'><sup></sup></span>";
+          dnd-none = "";
+          inhibited-notification = "<span foreground='red'><sup></sup></span>";
+          inhibited-none = "";
+          dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
+          dnd-inhibited-none = "";
+        };
+        return-type = "json";
+        exec-if = "which swaync-client";
+        exec = "swaync-client -swb";
+        on-click = "swaync-client -t -sw";
+        on-click-right = "swaync-client -d -sw";
+        on-click-middle = "swaync-client -C";
+        escape = true;
+      };
     };
   };
   programs.fuzzel.enable = true;
   programs.swaylock.enable = true;
-
-  services.mako.enable = true;
-  services.swayidle.enable = true;
-  services.polkit-gnome.enable = true;
 
   programs.ssh = {
     enable = true;
@@ -423,6 +450,10 @@ in
     };
   };
 
+  services.mako.enable = true;
+  services.swayidle.enable = true;
+  services.polkit-gnome.enable = true;
+  services.swaync.enable = true;
   services.network-manager-applet.enable = true;
 
   # Let Home Manager install and manage itself.
