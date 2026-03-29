@@ -83,11 +83,7 @@ in
       "Mod+Return".action.spawn = "ghostty";
       "Mod+Q".action.close-window = [];
       "Mod+Shift+E".action.quit = [];
-      "Mod+L".action.spawn = [
-        "sh"
-        "-c"
-        "loginctl lock-session && sleep 5 && niri msg action power-off-monitors"
-      ];
+      "Mod+L".action.spawn = "swaylock";
     };
     input = {
       focus-follows-mouse = {
