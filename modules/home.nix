@@ -259,16 +259,28 @@ in
     @define-color module-bg @base01;
 
     #pulseaudio,
-    #pulseaudio.muted,
+    #pulseaudio.muted {
+      background: @module-bg;
+      border-radius: 4px;
+      padding: 0 18px 0 8px;
+      margin: 4px 0;
+    }
+
+    #upower.charging,
+    #battery.charging {
+      background: @module-bg;
+      border-radius: 4px;
+      padding: 0 10px 0 8px;
+      margin: 4px 0;
+    }
+
     #upower,
     #battery,
-    #upower.charging,
-    #battery.Charging,
     #clock,
     #tray {
       background: @module-bg;
       border-radius: 4px;
-      padding: 8px;
+      padding: 0 8px 0 8px;
       margin: 4px 0;
     }
 
@@ -277,7 +289,7 @@ in
     #upower,
     #battery,
     #upower.charging,
-    #battery.Charging,
+    #battery.charging,
     #idle_inhibitor {
       font-family: "Noto Color Emoji";
       font-size: 13pt;
