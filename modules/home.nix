@@ -252,7 +252,70 @@ in
   programs.waybar = {
     enable = true;
     systemd.enable = true;
+    style = ''
+    #pulseaudio {
+      font-family: "Noto Color Emoji";
+      font-size: 13pt;
+      background: #13141f;
+      border-radius: 4px;
+      padding: 8px;
+      margin: 4px 0;
+    }
+    #pulseaudio.muted {
+      font-family: "Noto Color Emoji";
+      font-size: 13pt;
+      background: #13141f;
+      border-radius: 4px;
+      padding: 8px;
+      margin: 4px 0;
+    }
+    #upower,
+    #battery {
+      font-family: "Noto Color Emoji";
+      font-size: 13pt;
+      background: #13141f;
+      border-radius: 4px;
+      padding: 8px;
+      margin: 4px 0;
+    }
+    #upower.charging,
+    #battery.Charging {
+      font-family: "Noto Color Emoji";
+      font-size: 13pt;
+      background: #13141f;
+      border-radius: 4px;
+      padding: 8px;
+      margin: 4px 0;
+    }
+    #clock {
+      background: #13141f;
+      border-radius: 4px;
+      padding: 8px;
+      margin: 4px 0;
+    }
+    #idle_inhibitor {
+      font-family: "Noto Color Emoji";
+      font-size: 13pt;
+      background: #13141f;
+      border-radius: 20px 4px 4px 20px;
+      padding: 8px 16px 8px 20px; /* 20px padding-left is necessary to create uniform left/right edges */
+      margin: 4px 0;
+    }
+    #tray {
+      background: #13141f;
+      border-radius: 4px;
+      padding: 8px;
+      margin: 4px 0;
+    }
+    #custom-blank {
+      background: #13141f;
+      border-radius: 0 20px 20px 0;
+      padding-right: 12px; /* 12px padding-right = minimum necessary to create uniform left/right edges */
+      margin: 4px 4px 4px -12px; /* set a negative margin-left to: 1. cover the config-defined spacing between modules, 2. cover the 4px border-radius of the nearest module for a clean top/bottom, 3. cover the additional space left by an empty tray */
+    }
+    '';
     settings.main = {
+      spacing = 4;
       modules-left = [
         "niri/workspaces"
       ];
@@ -265,7 +328,12 @@ in
         "battery"
         "tray"
         "clock"
+        "custom/blank"
       ];
+      "custom/blank" = {
+        format = " ";
+        tooltip = false;
+      };
       idle_inhibitor = {
         format = "{icon}";
         format-icons = {
