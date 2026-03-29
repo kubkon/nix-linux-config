@@ -253,7 +253,7 @@ in
     enable = true;
     systemd.enable = true;
     style = ''
-    @define-color module-bg #13141f;
+    @define-color module-bg @base01;
 
     #pulseaudio,
     #pulseaudio.muted,
