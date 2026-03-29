@@ -158,7 +158,6 @@ in
         "idle_inhibitor"
         "pulseaudio"
         "battery"
-        "custom/notification"
         "tray"
         "clock"
       ];
@@ -241,27 +240,6 @@ in
         format-charging-battery-90 = "󰂋";
         format-charging-battery-100 = "󰂅";
         tooltip-format = "{capacity}% {timeTo}";
-      };
-      "custom/notification" = {
-        format = " {icon}  {text} ";
-        tooltip-format = "Left: Open Notification Center\nRight: Toggle Do not Disturb\nMiddle: Clear Notifications";
-        format-icons = {
-          notification = "<span foreground='red'><sup></sup></span>";
-          none = "";
-          dnd-notification = "<span foreground='red'><sup></sup></span>";
-          dnd-none = "";
-          inhibited-notification = "<span foreground='red'><sup></sup></span>";
-          inhibited-none = "";
-          dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
-          dnd-inhibited-none = "";
-        };
-        return-type = "json";
-        exec-if = "which swaync-client";
-        exec = "swaync-client -swb";
-        on-click = "swaync-client -t -sw";
-        on-click-right = "swaync-client -d -sw";
-        on-click-middle = "swaync-client -C";
-        escape = true;
       };
     };
   };
@@ -449,7 +427,6 @@ in
   services.mako.enable = true;
   services.swayidle.enable = true;
   services.polkit-gnome.enable = true;
-  services.swaync.enable = true;
   services.network-manager-applet.enable = true;
 
   # Let Home Manager install and manage itself.
