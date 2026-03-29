@@ -208,7 +208,10 @@ in
     layout = {
       shadow.enable = true;
       gaps = 8;
-      focus-ring.enable = true;
+      focus-ring = {
+        enable = true;
+        width = 2;
+      };
     };
     outputs = {
       "eDP-1".scale = 2.0;
@@ -415,9 +418,9 @@ in
     enable = true;
     enableFishIntegration = true;
     settings = {
-      font-size = 10;
-      background = "282828";
-      foreground = "dedede";
+      # font-size = 10;
+      # background = "282828";
+      # foreground = "dedede";
       keybind = [
         "ctrl+d=new_split:right"
         "ctrl+left_bracket=goto_split:left"

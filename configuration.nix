@@ -179,9 +179,23 @@
 
   xdg.portal = {
     enable = true;
-    xdgOpenUsePortal = true;
-    config.common.default = "*";
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+    ];
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+      niri = {
+        default = [
+          "gtk"
+          "gnome"
+        ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+      };
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -212,7 +226,6 @@
      htop
      zed-nightly.packages.${system}.default
      tracy.packages.${system}.default
-     gnomeExtensions.appindicator
      perf
      samply
      mold
@@ -220,10 +233,14 @@
      qemu
      nautilus
      pavucontrol
+     gnome-keyring
   ];
   environment.variables = {
     EDITOR = "hx";
     CARGO_BUILD_JOBS = 12;
+    XDG_CURRENT_DESKTOP = "niri";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_SESSION_DESKTOP = "niri";
   };
 
   virtualisation.libvirtd.enable = true;
