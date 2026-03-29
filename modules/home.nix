@@ -433,16 +433,16 @@ in
     timeouts = [
       {
         timeout = 300;
-        command = "swaylock";
+        command = "${pkgs.swaylock}/bin/swaylock -f";
       }
       {
         timeout = 360;
-        command = "niri msg action power-off-monitors";
-        resumeCommand = "niri msg action power-on-monitors";
+        command = "${pkgs.niri-unstable}/bin/niri msg action power-off-monitors";
+        resumeCommand = "${pkgs.niri-unstable}/bin/niri msg action power-on-monitors";
       }
     ];
     events = {
-      before-sleep = "swaylock";
+      before-sleep = "${pkgs.swaylock}/bin/swaylock -f";
     };
   };
 

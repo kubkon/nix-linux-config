@@ -159,10 +159,10 @@
 
   services.fwupd.enable = true;
   services.fprintd.enable = false;
-  services.logind.settings.Login = {
-    HandleLidSwitch = "suspend";
-    HandleLidSwitchExternalPower = "suspend";
-    HandleLidSwitchDocked = "ignore";
+  services.logind = {
+    lidSwitch = "suspend";
+    lidSwitchExternalPower = "suspend";
+    lidSwitchDocked = "ignore";
   };
 
   # security.pam.services = {
