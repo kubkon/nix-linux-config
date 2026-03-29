@@ -78,13 +78,114 @@ in
       { command = ["mako"]; }
       { command = [ "${lib.getExe pkgs.networkmanagerapplet}" ]; }
     ];
-    binds = {
-      "Mod+D".action.spawn = "fuzzel";
-      "Mod+Return".action.spawn = "ghostty";
-      "Mod+Q".action.close-window = [];
-      "Mod+Shift+E".action.quit = [];
-      "Mod+L".action.spawn = "swaylock";
-    };
+
+    binds =
+      with config.lib.niri.actions;
+      let
+        mod = "Mod";
+        set-volume = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@";
+        brillo = spawn "${pkgs.brillo}/bin/brillo" "-q" "-u" "300000";
+        playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
+      in
+      {
+        "${mod}+D".action = spawn "fuzzel";
+        "${mod}+Return".action = spawn "ghostty";
+        "${mod}+Q".action = close-window;
+        "${mod}+Shift+E".action = quit;
+        "${mod}+Shift+L".action = spawn "swaylock";
+        "${mod}+Shift+Slash".action = show-hotkey-overlay;
+
+        XF86AudioRaiseVolume.action = set-volume "5%+";
+        XF86AudioLowerVolume.action = set-volume "5%-";
+        XF86AudioMute.action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+        XF86AudioMicMute.action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
+
+        XF86AudioPlay.action = playerctl "play-pause";
+        XF86AudioStop.action = playerctl "pause";
+        XF86AudioPrev.action = playerctl "previous";
+        XF86AudioNext.action = playerctl "next";
+
+        XF86MonBrightnessUp.action = brillo "-A" "5";
+        XF86MonBrightnessDown.action = brillo "-U" "5";
+
+        # // Open/close the Overview: a zoomed-out view of workspaces and windows.
+        # // You can also move the mouse into the top-left hot corner,
+        # // or do a four-finger swipe up on a touchpad.
+        "${mod}+O" = {
+          action = toggle-overview;
+          repeat = false;
+        };
+
+        "${mod}+R".action = switch-preset-column-width;
+        "${mod}+Shift+R".action = reset-window-height;
+        "${mod}+F".action = maximize-column;
+        "${mod}+Shift+F".action = fullscreen-window;
+        "${mod}+C".action = center-column;
+
+        "${mod}+Shift+Q".action = close-window;
+        "${mod}+Left".action = focus-column-left;
+        "${mod}+Down".action = focus-workspace-down;
+        "${mod}+Up".action = focus-workspace-up;
+        "${mod}+Right".action = focus-column-right;
+
+        "${mod}+Shift+Left".action = move-column-left;
+        "${mod}+Shift+Right".action = move-column-right;
+        "${mod}+Shift+Down".action = move-column-to-workspace-down;
+        "${mod}+Shift+Up".action = move-column-to-workspace-up;
+
+        # There are also commands that consume or expel a single window to the side.
+        "${mod}+BracketLeft".action = consume-or-expel-window-left;
+        "${mod}+BracketRight".action = consume-or-expel-window-right;
+
+        # // Move the focused window between the floating and the tiling layout.
+        "${mod}+V".action = toggle-window-floating;
+        "${mod}+Shift+V".action = switch-focus-between-floating-and-tiling;
+
+        # // Finer width adjustments.
+        # // This command can also:
+        # // * set width in pixels: "1000"
+        # // * adjust width in pixels: "-5" or "+5"
+        # // * set width as a percentage of screen width: "25%"
+        # // * adjust width as a percentage of screen width: "-10%" or "+10%"
+        # // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
+        # // set-column-width "100" will make the column occupy 200 physical screen pixels.
+        "${mod}+Minus".action = set-column-width "-10%";
+        "${mod}+Equal".action = set-column-width "+10%";
+
+        # // Finer height adjustments when in column with other windows.
+        "${mod}+Shift+Minus".action = set-window-height "-10%";
+        "${mod}+Shift+Equal".action = set-window-height "+10%";
+
+        # // You can refer to workspaces by index. However, keep in mind that
+        # // niri is a dynamic workspace system, so these commands are kind of
+        # // "best effort". Trying to refer to a workspace index bigger than
+        # // the current workspace count will instead refer to the bottommost
+        # // (empty) workspace.
+        # //
+        # // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
+        # // will all refer to the 3rd workspace.
+        "${mod}+1".action = focus-workspace 1;
+        "${mod}+2".action = focus-workspace 2;
+        "${mod}+3".action = focus-workspace 3;
+        "${mod}+4".action = focus-workspace 4;
+        "${mod}+5".action = focus-workspace 5;
+        "${mod}+6".action = focus-workspace 6;
+        "${mod}+7".action = focus-workspace 7;
+        "${mod}+8".action = focus-workspace 8;
+        "${mod}+9".action = focus-workspace 9;
+
+        # The wonky format used here is to work-around https://github.com/sodiboo/niri-flake/issues/944
+        "${mod}+Shift+1".action.move-column-to-workspace = [ 1 ];
+        "${mod}+Shift+2".action.move-column-to-workspace = [ 2 ];
+        "${mod}+Shift+3".action.move-column-to-workspace = [ 3 ];
+        "${mod}+Shift+4".action.move-column-to-workspace = [ 4 ];
+        "${mod}+Shift+5".action.move-column-to-workspace = [ 5 ];
+        "${mod}+Shift+6".action.move-column-to-workspace = [ 6 ];
+        "${mod}+Shift+7".action.move-column-to-workspace = [ 7 ];
+        "${mod}+Shift+8".action.move-column-to-workspace = [ 8 ];
+        "${mod}+Shift+9".action.move-column-to-workspace = [ 9 ];
+      };
+
     input = {
       focus-follows-mouse = {
         enable = true;
