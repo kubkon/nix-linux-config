@@ -162,7 +162,7 @@ in
         "clock"
       ];
       idle_inhibitor = {
-        format = "{icon} ";
+        format = "{icon}";
         format-icons = {
           activated = "";
           deactivated = "";
@@ -183,8 +183,8 @@ in
         format-alt =  "{:%Y-%m-%d}";
       };
       pulseaudio = {
-        format = "{icon} ";
-        format-bluetooth = "{icon}  ";
+        format = "{icon}";
+        format-bluetooth = "{icon} ";
         format-muted = "󰝟";
         format-icons = {
           headphone = "";
@@ -201,7 +201,7 @@ in
         spacing = 10;
       };
       battery = {
-        format = "{icon}  ";
+        format = "{icon}";
 
         format-icons = [
           "󰁺"
