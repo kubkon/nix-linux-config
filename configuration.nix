@@ -158,14 +158,19 @@
   # services.xserver.libinput.enable = true;
 
   services.fwupd.enable = true;
-  services.fprintd.enable = true;
+  services.fprintd.enable = false;
 
-  security.pam.services = {
-    sudo.fprintAuth = true; # Enable fingerprint for sudo
-    su.fprintAuth = true; # Enable fingerprint for su
-    sddm.fprintAuth = false; # Keep for SDDM
-    login.fprintAuth = false; # Keep for login
-  };
+  # security.pam.services = {
+  #   sudo.fprintAuth = true; # Enable fingerprint for sudo
+  #   su.fprintAuth = true; # Enable fingerprint for su
+  #   sddm.fprintAuth = false; # Keep for SDDM
+  #   login.fprintAuth = false; # Keep for login
+
+  #   # Workaround for: https://github.com/swaywm/swaylock/issues/61#issuecomment-965175390
+  #   swaylock = {
+  #     fprintAuth = false;
+  #   };
+  # };
 
   services.avahi = {
     enable = true;
