@@ -116,6 +116,10 @@ in
           repeat = false;
         };
 
+        "${mod}+P".action.screenshot = { show-pointer = false; };
+        "${mod}+Shift+P".action.screenshot-screen = { show-pointer = false; };
+        "${mod}+Ctrl+P".action.screenshot-window = { show-pointer = false; };
+
         "${mod}+R".action = switch-preset-column-width;
         "${mod}+Shift+R".action = reset-window-height;
         "${mod}+F".action = maximize-column;

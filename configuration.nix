@@ -172,6 +172,11 @@
   };
   services.dbus.packages = [ pkgs.nautilus ];
 
+  services.gvfs = {
+    enable = true;
+    package = lib.mkForce pkgs.gnome.gvfs;
+  };
+
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
@@ -213,6 +218,7 @@
      mold
      sentry-cli
      qemu
+     nautilus
      pavucontrol
   ];
   environment.variables = {
