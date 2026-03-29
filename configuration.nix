@@ -159,6 +159,11 @@
 
   services.fwupd.enable = true;
   services.fprintd.enable = false;
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "suspend";
+    HandleLidSwitchDocked = "ignore";
+  };
 
   # security.pam.services = {
   #   sudo.fprintAuth = true; # Enable fingerprint for sudo

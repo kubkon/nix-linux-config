@@ -35,7 +35,7 @@ in
     fishPlugins.grc
     grc
     networkmanagerapplet
-    swaynotificationcenter
+    wl-clipboard
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -425,9 +425,26 @@ in
   };
 
   services.mako.enable = true;
-  services.swayidle.enable = true;
   services.polkit-gnome.enable = true;
   services.network-manager-applet.enable = true;
+
+  services.swayidle = {
+    enable = true;
+    timeouts = [
+      {
+        timeout = 300;
+        command = "swaylock";
+      }
+      {
+        timeout = 360;
+        command = "niri msg action power-off-monitors";
+        resumeCommand = "niri msg action power-on-monitors";
+      }
+    ];
+    events = {
+      before-sleep = "swaylock";
+    };
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
