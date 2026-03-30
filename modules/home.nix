@@ -3,6 +3,8 @@
 let
   userName = "Jakub Konka";
   userEmail = "kubkon@jakubkonka.com";
+  username = "kubkon";
+  homeDirectory = "/home/kubkon";
   signingKey = "~/.ssh/id_ecdsa_sk.pub";
   allowedSigners = "~/.ssh/allowed_signers";
   gpgFormat = "ssh";
@@ -10,8 +12,8 @@ in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "kubkon";
-  home.homeDirectory = "/home/kubkon";
+  home.username = "${username}";
+  home.homeDirectory = "${homeDirectory}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -36,6 +38,7 @@ in
     grc
     networkmanagerapplet
     wl-clipboard
+    swaybg
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -77,6 +80,7 @@ in
     spawn-at-startup = [
       { command = ["mako"]; }
       { command = [ "${lib.getExe pkgs.networkmanagerapplet}" ]; }
+      { argv = ["swaybg" "--image" "${homeDirectory}/Pictures/cat-blue-eye.png"]; }
     ];
 
     binds =
@@ -211,6 +215,8 @@ in
       focus-ring = {
         enable = true;
         width = 2;
+        active.color = config.lib.stylix.colors.withHashtag.base0D;
+        inactive.color = config.lib.stylix.colors.withHashtag.base03;
       };
     };
     outputs = {
@@ -298,7 +304,7 @@ in
     #idle_inhibitor {
       background: @module-bg;
       border-radius: 20px 4px 4px 20px;
-      padding: 8px 16px 8px 20px; /* 20px padding-left is necessary to create uniform left/right edges */
+      padding: 4px 16px 4px 20px; /* 20px padding-left is necessary to create uniform left/right edges */
       margin: 4px 0;
     }
 
@@ -430,9 +436,6 @@ in
     enable = true;
     enableFishIntegration = true;
     settings = {
-      # font-size = 10;
-      # background = "282828";
-      # foreground = "dedede";
       keybind = [
         "ctrl+d=new_split:right"
         "ctrl+left_bracket=goto_split:left"
@@ -491,6 +494,7 @@ in
     defaultEditor = true;
 
     settings = {
+      theme = lib.mkForce "tokyonight";
       editor = {
         cursor-shape = {
           normal = "block";
