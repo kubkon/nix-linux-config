@@ -80,7 +80,7 @@ in
     spawn-at-startup = [
       { command = ["mako"]; }
       { command = [ "${lib.getExe pkgs.networkmanagerapplet}" ]; }
-      { argv = ["swaybg" "--image" "${homeDirectory}/Pictures/cat-blue-eye.png"]; }
+      { argv = ["swaybg" "--image" "${homeDirectory}/Pictures/nix-black-4k.png"]; }
     ];
 
     binds =
@@ -220,8 +220,22 @@ in
       };
     };
     outputs = {
-      "eDP-1".scale = 2.0;
-      "DP-2".scale = 1.5;
+      "eDP-1" = {
+        mode = {
+          width = 2880;
+          height = 1920;
+          refresh = 120.0;
+        };
+        scale = 2.0;
+      };
+      "DP-2" = {
+        mode = {
+          width = 3840;
+          height = 2160;
+          refresh = 100.0;
+        };
+        scale = 1.5;
+      };
     };
     prefer-no-csd = true;
   };
