@@ -11,7 +11,22 @@
       ./modules/yubikey.nix
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+
+    trusted-users = [ "kubkon" ];
+
+    substituters = [
+      "https://zed.cachix.org"
+      "https://cache.garnix.io"
+      "https://cache.nixos.org"
+    ];
+
+    trusted-public-keys = [
+      "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU="
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+    ];
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -234,6 +249,8 @@
      nautilus
      pavucontrol
      gnome-keyring
+     xwayland-satellite # xwayland support
+     obs-studio
   ];
   environment.variables = {
     EDITOR = "hx";

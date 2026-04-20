@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager/master";
-    zed-nightly.url = "github:zed-industries/zed";
+    zed-nightly.url = "github:zed-industries/zed/nightly";
     tracy.url = "github:kubkon/tracy.nix";
     niri.url = "github:sodiboo/niri-flake";
     stylix = {

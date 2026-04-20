@@ -450,6 +450,7 @@ in
     enable = true;
     enableFishIntegration = true;
     settings = {
+      font-size = 10;
       keybind = [
         "ctrl+d=new_split:right"
         "ctrl+left_bracket=goto_split:left"
