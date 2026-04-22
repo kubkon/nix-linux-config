@@ -88,7 +88,7 @@ in
       let
         mod = "Mod";
         set-volume = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@";
-        brillo = spawn "${pkgs.brillo}/bin/brillo" "-q" "-u" "300000";
+        brightnessctl = spawn "${pkgs.brightnessctl}/bin/brightnessctl";
         playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
       in
       {
@@ -109,8 +109,8 @@ in
         XF86AudioPrev.action = playerctl "previous";
         XF86AudioNext.action = playerctl "next";
 
-        XF86MonBrightnessUp.action = brillo "-A" "5";
-        XF86MonBrightnessDown.action = brillo "-U" "5";
+        XF86MonBrightnessUp.action = brightnessctl "set" "5%+";
+        XF86MonBrightnessDown.action = brightnessctl "set" "5%-";
 
         # // Open/close the Overview: a zoomed-out view of workspaces and windows.
         # // You can also move the mouse into the top-left hot corner,

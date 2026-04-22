@@ -165,6 +165,12 @@
     pulse.enable = true;
   };
 
+  services.xserver.xkb = {
+    layout = "us,us";
+    variant = "colemak,";
+    options = "grp:win_space_toggle";
+  };
+
   services.displayManager.gdm.enable = true;
   services.gnome.gnome-keyring.enable = true;
   security.polkit.enable = true;
@@ -218,7 +224,7 @@
     isNormalUser = true;
     useDefaultShell = true;
     description = "Jakub Konka";
-    extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" "video" ];
     packages = with pkgs; [
     ];
   };
