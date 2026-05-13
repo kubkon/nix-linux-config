@@ -39,6 +39,7 @@ in
     networkmanagerapplet
     wl-clipboard
     swaybg
+    jq
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -117,6 +118,11 @@ in
         # // or do a four-finger swipe up on a touchpad.
         "${mod}+O" = {
           action = toggle-overview;
+          repeat = false;
+        };
+
+        "${mod}+S" = {
+          action = spawn "${pkgs.wl-mirror}/bin/wl-mirror" "$(niri msg --json focused-output | jq -r .name)";
           repeat = false;
         };
 
@@ -243,6 +249,7 @@ in
   stylix = {
     enable = true;
     autoEnable = true;
+    polarity = "dark";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
 
     fonts = {
