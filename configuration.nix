@@ -247,6 +247,7 @@
      discord
      zulip
      htop
+     btop
      zed-nightly.packages.${system}.default
      tracy.packages.${system}.default
      perf

@@ -216,11 +216,12 @@ in
       };
     };
     layout = {
-      shadow.enable = true;
-      gaps = 8;
+      gaps = 2;
+      shadow.enable = false;
+      border.enable = false;
       focus-ring = {
         enable = true;
-        width = 2;
+        width = 0.5;
         active.color = config.lib.stylix.colors.withHashtag.base0D;
         inactive.color = config.lib.stylix.colors.withHashtag.base03;
       };
@@ -277,6 +278,8 @@ in
         desktop = 11;
       };
     };
+
+    targets.waybar.addCss = false;
   };
 
   programs.waybar = {
