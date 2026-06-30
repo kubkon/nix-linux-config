@@ -7,6 +7,7 @@
     home-manager.url = "github:nix-community/home-manager/master";
     zed-nightly.url = "github:zed-industries/zed/nightly";
     tracy.url = "github:kubkon/tracy.nix";
+    superluminal.url = "github:kubkon/superluminal-nix-linux";
     niri.url = "github:sodiboo/niri-flake";
     stylix = {
       url = "github:nix-community/stylix";
@@ -14,12 +15,12 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-hardware, home-manager, zed-nightly, tracy, niri, stylix }: {
+  outputs = inputs@{ self, nixpkgs, nixos-hardware, home-manager, zed-nightly, tracy, superluminal, niri, stylix }: {
     nixosConfigurations."ichimaru" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
       specialArgs = {
-        inherit zed-nightly tracy;
+        inherit zed-nightly tracy superluminal;
       };
 
       modules = [

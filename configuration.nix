@@ -2,8 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, zed-nightly, tracy, ... }:
+{ config, pkgs, lib, zed-nightly, tracy, superluminal, ... }:
 
+let
+  system = pkgs.stdenv.hostPlatform.system;
+  superluminalPackage = superluminal.packages.${system}.default;
+in
 {
   imports =
     [
@@ -38,6 +42,11 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  boot.kernel.sysctl = {
+    "kernel.perf_event_paranoid" = -1;
+    "kernel.kptr_restrict" = 0;
+  };
 
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
@@ -177,6 +186,18 @@
   services.gnome.gnome-keyring.enable = true;
   security.polkit.enable = true;
 
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "PolicyKit authentication agent";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+    };
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -250,6 +271,7 @@
      btop
      zed-nightly.packages.${system}.default
      tracy.packages.${system}.default
+     superluminalPackage
      perf
      samply
      mold
@@ -261,6 +283,11 @@
      xwayland-satellite # xwayland support
      obs-studio
      mullvad-vpn
+     ripgrep
+     python3
+     gh
+     bubblewrap
+     cmark
   ];
   environment.variables = {
     EDITOR = "hx";
