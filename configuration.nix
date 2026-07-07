@@ -288,6 +288,7 @@ in
      gh
      bubblewrap
      cmark
+     mangohud
   ];
   environment.variables = {
     EDITOR = "hx";
