@@ -2,11 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, zed-nightly, tracy, superluminal, ... }:
+{ config, pkgs, lib, zed-nightly, tracy, superluminal, delta, ... }:
 
 let
   system = pkgs.stdenv.hostPlatform.system;
   superluminalPackage = superluminal.packages.${system}.default;
+  deltaPackage = delta.packages.${system}.default;
 in
 {
   imports =
@@ -22,13 +23,11 @@ in
 
     substituters = [
       "https://zed.cachix.org"
-      "https://cache.garnix.io"
       "https://cache.nixos.org"
     ];
 
     trusted-public-keys = [
       "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU="
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
 
@@ -265,13 +264,14 @@ in
      ghostty
      helix
      slack
-     discord
+     # discord
      zulip
      htop
      btop
      zed-nightly.packages.${system}.default
      tracy.packages.${system}.default
      superluminalPackage
+     deltaPackage
      perf
      samply
      mold
@@ -289,6 +289,7 @@ in
      bubblewrap
      cmark
      mangohud
+     claude-code
   ];
   environment.variables = {
     EDITOR = "hx";
