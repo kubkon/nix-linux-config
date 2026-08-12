@@ -121,9 +121,10 @@ in
 
   programs.niri = {
     enable = true;
-    package = pkgs.niri;
+    package = pkgs.niri-unstable;
   };
   niri-flake.cache.enable = true;
+  services.displayManager.defaultSession = "niri";
 
   stylix = {
     enable = true;

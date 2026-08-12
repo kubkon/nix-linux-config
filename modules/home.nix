@@ -634,8 +634,8 @@ in
       }
       {
         timeout = 360;
-        command = "${pkgs.niri}/bin/niri msg action power-off-monitors";
-        resumeCommand = "${pkgs.niri}/bin/niri msg action power-on-monitors";
+        command = "${pkgs.niri-unstable}/bin/niri msg action power-off-monitors";
+        resumeCommand = "${pkgs.niri-unstable}/bin/niri msg action power-on-monitors";
       }
     ];
     events = {

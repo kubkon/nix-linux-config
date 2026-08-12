@@ -13,7 +13,7 @@
     superluminal.url = "github:kubkon/superluminal-nix-linux";
     delta.url = "git+ssh://git@github.com/zed-industries/delta-nix-linux";
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
