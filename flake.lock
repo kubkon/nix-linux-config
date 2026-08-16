@@ -88,11 +88,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1786537820,
-        "narHash": "sha256-V96OccxfSvgo5OhOcFhRwJAwGT7fzZOi2uVAFj85Tts=",
+        "lastModified": 1786861022,
+        "narHash": "sha256-bwzliL9TUmjFOArAqvmiVOgAZowbH5ov0p7EttBn0CI=",
         "ref": "refs/heads/main",
-        "rev": "70b3143bd1787b2e61fc237e6f71e8aeffc4c288",
-        "revCount": 338,
+        "rev": "29656eef6f2a386b4d2806933fab56ad314540ea",
+        "revCount": 396,
         "type": "git",
         "url": "ssh://git@github.com/zed-industries/delta-nix-linux"
       },
@@ -543,11 +543,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1782855698,
-        "narHash": "sha256-mCbFyJqcNnLLcDWQVQ0NBuvi2g9YOZ4a326o90emO78=",
+        "lastModified": 1786717589,
+        "narHash": "sha256-RmJA5jk3Pb+CH0027IlS6IWZ/I+zL+sWy14Ri0wfz8o=",
         "owner": "kubkon",
         "repo": "superluminal-nix-linux",
-        "rev": "05cb12f4f4a3acf9c494e1f2aa62f30eb4923114",
+        "rev": "8c41c76d140ffef6a10bbc4c50319f1575cbb186",
         "type": "github"
       },
       "original": {
@@ -696,11 +696,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1786532478,
-        "narHash": "sha256-q6PVkOsyUCVJzVGV9SRqwZrBeXaIcxtjEZKCsBDswKY=",
+        "lastModified": 1786666827,
+        "narHash": "sha256-azs9DjJnztKlLWxbk6gUcJGcwl0oO45Cyx57e4HWb/w=",
         "owner": "zed-industries",
         "repo": "zed",
-        "rev": "fdf5de99c6456d695ac5e0c255915f4fa611fd75",
+        "rev": "0ad5441b5370428eaa353a36f63c50c5448eead5",
         "type": "github"
       },
       "original": {

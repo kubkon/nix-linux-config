@@ -184,7 +184,10 @@ in
 
   services.displayManager.gdm.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  security.polkit.enable = true;
+  security.polkit = {
+    enable = true;
+    enablePkexecWrapper = true;
+  };
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "PolicyKit authentication agent";
@@ -290,7 +293,9 @@ in
      bubblewrap
      cmark
      mangohud
+     amdgpu_top
      claude-code
+     comma
   ];
   environment.variables = {
     EDITOR = "hx";
