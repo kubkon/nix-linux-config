@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   userName = "Jakub Konka";
@@ -79,9 +84,15 @@ in
 
   programs.niri.settings = {
     spawn-at-startup = [
-      { command = ["mako"]; }
+      { command = [ "mako" ]; }
       { command = [ "${lib.getExe pkgs.networkmanagerapplet}" ]; }
-      { argv = ["swaybg" "--image" "${homeDirectory}/Pictures/nix-black-4k.png"]; }
+      {
+        argv = [
+          "swaybg"
+          "--image"
+          "${homeDirectory}/Pictures/nix-black-4k.png"
+        ];
+      }
     ];
 
     binds =
@@ -126,9 +137,15 @@ in
           repeat = false;
         };
 
-        "${mod}+P".action.screenshot = { show-pointer = false; };
-        "${mod}+Shift+P".action.screenshot-screen = { show-pointer = false; };
-        "${mod}+Ctrl+P".action.screenshot-window = { show-pointer = false; };
+        "${mod}+P".action.screenshot = {
+          show-pointer = false;
+        };
+        "${mod}+Shift+P".action.screenshot-screen = {
+          show-pointer = false;
+        };
+        "${mod}+Ctrl+P".action.screenshot-window = {
+          show-pointer = false;
+        };
 
         "${mod}+R".action = switch-preset-column-width;
         "${mod}+Shift+R".action = reset-window-height;
@@ -286,58 +303,58 @@ in
     enable = true;
     systemd.enable = true;
     style = ''
-    @define-color module-bg @base01;
+      @define-color module-bg @base01;
 
-    #pulseaudio,
-    #pulseaudio.muted {
-      background: @module-bg;
-      border-radius: 4px;
-      padding: 0 18px 0 8px;
-      margin: 4px 0;
-    }
+      #pulseaudio,
+      #pulseaudio.muted {
+        background: @module-bg;
+        border-radius: 4px;
+        padding: 0 18px 0 8px;
+        margin: 4px 0;
+      }
 
-    #upower.charging,
-    #battery.charging {
-      background: @module-bg;
-      border-radius: 4px;
-      padding: 0 10px 0 8px;
-      margin: 4px 0;
-    }
+      #upower.charging,
+      #battery.charging {
+        background: @module-bg;
+        border-radius: 4px;
+        padding: 0 10px 0 8px;
+        margin: 4px 0;
+      }
 
-    #upower,
-    #battery,
-    #clock,
-    #tray {
-      background: @module-bg;
-      border-radius: 4px;
-      padding: 0 8px 0 8px;
-      margin: 4px 0;
-    }
+      #upower,
+      #battery,
+      #clock,
+      #tray {
+        background: @module-bg;
+        border-radius: 4px;
+        padding: 0 8px 0 8px;
+        margin: 4px 0;
+      }
 
-    #pulseaudio,
-    #pulseaudio.muted,
-    #upower,
-    #battery,
-    #upower.charging,
-    #battery.charging,
-    #idle_inhibitor {
-      font-family: "Noto Color Emoji";
-      font-size: 13pt;
-    }
+      #pulseaudio,
+      #pulseaudio.muted,
+      #upower,
+      #battery,
+      #upower.charging,
+      #battery.charging,
+      #idle_inhibitor {
+        font-family: "Noto Color Emoji";
+        font-size: 13pt;
+      }
 
-    #idle_inhibitor {
-      background: @module-bg;
-      border-radius: 20px 4px 4px 20px;
-      padding: 4px 16px 4px 20px; /* 20px padding-left is necessary to create uniform left/right edges */
-      margin: 4px 0;
-    }
+      #idle_inhibitor {
+        background: @module-bg;
+        border-radius: 20px 4px 4px 20px;
+        padding: 4px 16px 4px 20px; /* 20px padding-left is necessary to create uniform left/right edges */
+        margin: 4px 0;
+      }
 
-    #custom-blank {
-      background: @module-bg;
-      border-radius: 0 20px 20px 0;
-      padding-right: 12px; /* 12px padding-right = minimum necessary to create uniform left/right edges */
-      margin: 4px 4px 4px -12px; /* set a negative margin-left to: 1. cover the config-defined spacing between modules, 2. cover the 4px border-radius of the nearest module for a clean top/bottom, 3. cover the additional space left by an empty tray */
-    }
+      #custom-blank {
+        background: @module-bg;
+        border-radius: 0 20px 20px 0;
+        padding-right: 12px; /* 12px padding-right = minimum necessary to create uniform left/right edges */
+        margin: 4px 4px 4px -12px; /* set a negative margin-left to: 1. cover the config-defined spacing between modules, 2. cover the 4px border-radius of the nearest module for a clean top/bottom, 3. cover the additional space left by an empty tray */
+      }
     '';
     settings.main = {
       spacing = 4;
@@ -378,7 +395,7 @@ in
       };
       clock = {
         tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        format-alt =  "{:%Y-%m-%d}";
+        format-alt = "{:%Y-%m-%d}";
       };
       pulseaudio = {
         format = "{icon}";
@@ -447,7 +464,7 @@ in
   programs.ssh = {
     enable = true;
     extraConfig = pkgs.lib.mkBefore ''
-    PKCS11Provider=${pkgs.yubico-piv-tool}/lib/libykcs11.so
+      PKCS11Provider=${pkgs.yubico-piv-tool}/lib/libykcs11.so
     '';
   };
 
@@ -617,6 +634,20 @@ in
             "goto_next_paragraph"
           ];
         };
+      };
+    };
+
+    languages = {
+      language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+        }
+      ];
+
+      language-server = {
+        zls = { };
       };
     };
   };

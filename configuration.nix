@@ -98,6 +98,7 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
 
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
@@ -164,7 +165,10 @@ in
   '';
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplip ];
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -272,6 +276,7 @@ in
      zulip
      htop
      btop
+     gdb
      zed-nightly.packages.${system}.default
      tracy.packages.${system}.default
      superluminalPackage
