@@ -2,22 +2,35 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, zed-nightly, tracy, superluminal, delta, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  zed-nightly,
+  tracy,
+  superluminal,
+  delta,
+  delta-trunk,
+  ...
+}:
 
 let
   system = pkgs.stdenv.hostPlatform.system;
   superluminalPackage = superluminal.packages.${system}.default;
-  deltaPackage = delta.packages.${system}.default;
+  deltaTrunk = delta-trunk.packages.${system}.delta-trunk;
+  deltaPackage = delta.packages.${system}.delta;
 in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./modules/yubikey.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./modules/yubikey.nix
+  ];
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     trusted-users = [ "kubkon" ];
 
@@ -254,11 +267,17 @@ in
     isNormalUser = true;
     useDefaultShell = true;
     description = "Jakub Konka";
-    extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" "video" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "libvirtd"
+      "video"
+    ];
     packages = with pkgs; [
     ];
   };
-  users.groups.libvirtd.members = ["kubkon"];
+  users.groups.libvirtd.members = [ "kubkon" ];
   users.defaultUserShell = pkgs.fish;
 
   programs.firefox.enable = true;
@@ -269,38 +288,39 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     ghostty
-     helix
-     slack
-     # discord
-     zulip
-     htop
-     btop
-     gdb
-     zed-nightly.packages.${system}.default
-     tracy.packages.${system}.default
-     superluminalPackage
-     deltaPackage
-     perf
-     samply
-     mold
-     sentry-cli
-     qemu
-     nautilus
-     pavucontrol
-     gnome-keyring
-     xwayland-satellite # xwayland support
-     obs-studio
-     mullvad-vpn
-     ripgrep
-     python3
-     gh
-     bubblewrap
-     cmark
-     mangohud
-     amdgpu_top
-     claude-code
-     comma
+    ghostty
+    helix
+    slack
+    # discord
+    zulip
+    htop
+    btop
+    gdb
+    zed-nightly.packages.${system}.default
+    tracy.packages.${system}.default
+    superluminalPackage
+    deltaTrunk
+    deltaPackage
+    perf
+    samply
+    mold
+    sentry-cli
+    qemu
+    nautilus
+    pavucontrol
+    gnome-keyring
+    xwayland-satellite # xwayland support
+    obs-studio
+    mullvad-vpn
+    ripgrep
+    python3
+    gh
+    bubblewrap
+    cmark
+    mangohud
+    amdgpu_top
+    claude-code
+    comma
   ];
   environment.variables = {
     EDITOR = "hx";

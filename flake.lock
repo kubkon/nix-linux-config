@@ -88,11 +88,29 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1787635438,
-        "narHash": "sha256-8d8c8SwEPlil/Zs+Ub7oczupoGVY/PWWMg7Gm7aVgj0=",
+        "lastModified": 1790338327,
+        "narHash": "sha256-AMqXZz8MV9t0UnCRqi+VgsAQNkVJbbaN638cQ1RMV/c=",
+        "owner": "zed-industries",
+        "repo": "delta-nix",
+        "rev": "a9b7f20479455d921c881c7cd37cf2370e671bc7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zed-industries",
+        "repo": "delta-nix",
+        "type": "github"
+      }
+    },
+    "delta-trunk": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1790337212,
+        "narHash": "sha256-kuSFFMCf4/6h3VSAN0He6xXQ7KAtoMQWf8BXrsf3tzs=",
         "ref": "refs/heads/main",
-        "rev": "415ef0989a218f82bcbf1e47732e6cd17e72396c",
-        "revCount": 598,
+        "rev": "df442beae17989aedb7cc02b32e78a1149847e9d",
+        "revCount": 1082,
         "type": "git",
         "url": "ssh://git@github.com/zed-industries/delta-nix-linux"
       },
@@ -290,7 +308,7 @@
     },
     "nixos-hardware": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1786528975,
@@ -371,6 +389,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1783224372,
+        "narHash": "sha256-8i/87eeoqiGE4yOTjwSA3Eh/ziJRQEmd/unYU+K27sk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1767892417,
         "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
         "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
@@ -382,7 +416,7 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1786384358,
         "narHash": "sha256-RzPPiWeUtuvymnpuEWsdtzli5w4kjZs49FqEs3/1u+I=",
@@ -398,7 +432,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1782723713,
         "narHash": "sha256-oPXCU/SSUokcGaJREHibG1CBX3+s/W7orDWQOZDsEeQ=",
@@ -414,7 +448,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_6": {
       "locked": {
         "lastModified": 1764517877,
         "narHash": "sha256-pp3uT4hHijIC8JUK5MEqeAWmParJrgBVzHLNfJDZxg4=",
@@ -430,7 +464,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_6": {
+    "nixpkgs_7": {
       "locked": {
         "lastModified": 1769789167,
         "narHash": "sha256-kKB3bqYJU5nzYeIROI82Ef9VtTbu4uA3YydSk/Bioa8=",
@@ -474,10 +508,11 @@
     "root": {
       "inputs": {
         "delta": "delta",
+        "delta-trunk": "delta-trunk",
         "home-manager": "home-manager",
         "niri": "niri",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "stylix": "stylix",
         "superluminal": "superluminal",
         "tracy": "tracy",
@@ -492,11 +527,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786247265,
-        "narHash": "sha256-cVTcTqAhzSNMOVddtBhFpuv+Vx6/SgrhgZWJiI61H24=",
+        "lastModified": 1788851328,
+        "narHash": "sha256-YOwlUD0Lt/3SulKhZ7z0Jmgbq/DWh8SjnGwUlFSw+YM=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "6df7076ea0f5697e3242719a4c71211f00411cf5",
+        "rev": "6ae57a71bcb0bebc7a66cc2bd76942c4cf649167",
         "type": "github"
       },
       "original": {
@@ -540,7 +575,7 @@
     },
     "superluminal": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1786717589,
@@ -639,7 +674,7 @@
     "tracy": {
       "inputs": {
         "flake-parts": "flake-parts_2",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1770744865,
@@ -692,15 +727,15 @@
       "inputs": {
         "crane": "crane",
         "flake-parts": "flake-parts_3",
-        "nixpkgs": "nixpkgs_6",
+        "nixpkgs": "nixpkgs_7",
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1787631009,
-        "narHash": "sha256-+dYFr7Qzwi0l1RclQAcJfjhEaw/u3T73jYZFqtJODxM=",
+        "lastModified": 1790292775,
+        "narHash": "sha256-2fuxA8lW3KUeDpoS3fuR2UNVXwWtDEdvmb4HKMYWO08=",
         "owner": "zed-industries",
         "repo": "zed",
-        "rev": "4ca9005579ad56c3198d1d6a8583825e97921b13",
+        "rev": "7fdb97cad51694f2cdfd36abcb11265f4c4dafe2",
         "type": "github"
       },
       "original": {

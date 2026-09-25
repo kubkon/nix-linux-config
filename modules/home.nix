@@ -645,10 +645,6 @@ in
           formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
         }
       ];
-
-      language-server = {
-        zls = { };
-      };
     };
   };
 
