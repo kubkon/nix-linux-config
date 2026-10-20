@@ -273,6 +273,7 @@ in
       "audio"
       "libvirtd"
       "video"
+      "docker"
     ];
     packages = with pkgs; [
     ];
@@ -330,8 +331,11 @@ in
     XDG_SESSION_DESKTOP = "niri";
   };
 
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+    docker.enable = true;
+  };
 
   fonts.packages = with pkgs; [
     noto-fonts
