@@ -41,8 +41,7 @@ in
     fzf
     fishPlugins.grc
     grc
-    # The service alone does not expose Caffeine's icons to the tray host.
-    config.services.caffeine.package
+    caffeine-ng # Includes tray icons and an XDG autostart entry.
     networkmanagerapplet
     wl-clipboard
     swaybg
@@ -627,7 +626,6 @@ in
   services.mako.enable = true;
   services.polkit-gnome.enable = true;
   services.network-manager-applet.enable = true;
-  services.caffeine.enable = true;
 
   services.swayidle = {
     enable = true;
