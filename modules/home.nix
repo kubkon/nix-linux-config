@@ -41,6 +41,8 @@ in
     fzf
     fishPlugins.grc
     grc
+    # The service alone does not expose Caffeine's icons to the tray host.
+    config.services.caffeine.package
     networkmanagerapplet
     wl-clipboard
     swaybg
