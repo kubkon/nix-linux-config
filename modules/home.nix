@@ -336,17 +336,9 @@ in
       #upower,
       #battery,
       #upower.charging,
-      #battery.charging,
-      #idle_inhibitor {
+      #battery.charging {
         font-family: "Noto Color Emoji";
         font-size: 13pt;
-      }
-
-      #idle_inhibitor {
-        background: @module-bg;
-        border-radius: 20px 4px 4px 20px;
-        padding: 4px 16px 4px 20px; /* 20px padding-left is necessary to create uniform left/right edges */
-        margin: 4px 0;
       }
 
       #custom-blank {
@@ -365,7 +357,6 @@ in
         "niri/window"
       ];
       modules-right = [
-        "idle_inhibitor"
         "pulseaudio"
         "battery"
         "tray"
@@ -375,13 +366,6 @@ in
       "custom/blank" = {
         format = " ";
         tooltip = false;
-      };
-      idle_inhibitor = {
-        format = "{icon}";
-        format-icons = {
-          activated = "";
-          deactivated = "";
-        };
       };
       "niri/workspaces" = {
         format = "{icon} {value}";
@@ -651,6 +635,7 @@ in
   services.mako.enable = true;
   services.polkit-gnome.enable = true;
   services.network-manager-applet.enable = true;
+  services.caffeine.enable = true;
 
   services.swayidle = {
     enable = true;
