@@ -53,7 +53,26 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest.extend (
+    _final: prev: {
+      # nixpkgs now signs every kernel module with kmodigest and the modules
+      # aggregator expects a `<module>.ko.cer` next to every `.ko`
+      # (https://github.com/NixOS/nixpkgs/issues/575192). framework-laptop-kmod
+      # (pulled in by nixos-hardware's framework module) installs the `.ko` by
+      # hand and so never produces one. This replicates the upstream fix,
+      # https://github.com/NixOS/nixpkgs/pull/575818, which has not reached
+      # nixos-unstable yet. Remove once it has.
+      framework-laptop-kmod = prev.framework-laptop-kmod.overrideAttrs (old: {
+        makeFlags = old.makeFlags ++ [
+          "INSTALL_MOD_PATH=${placeholder "out"}"
+          "INSTALL_MOD_DIR=extra"
+          "DEPMOD=true"
+        ];
+        installPhase = null;
+        installTargets = [ "modules_install" ];
+      });
+    }
+  );
 
   boot.kernel.sysctl = {
     "kernel.perf_event_paranoid" = -1;
