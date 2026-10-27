@@ -7,6 +7,7 @@
   pkgs,
   lib,
   zed-nightly,
+  kache,
   tracy,
   superluminal,
   delta,
@@ -317,6 +318,7 @@ in
     btop
     gdb
     zed-nightly.packages.${system}.default
+    kache.packages.${system}.default
     tracy.packages.${system}.default
     superluminalPackage
     deltaTrunk

@@ -9,6 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zed-nightly.url = "github:zed-industries/zed/nightly";
+    kache = {
+      url = "github:kunobi-ninja/kache/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     tracy.url = "github:kubkon/tracy.nix";
     superluminal.url = "github:kubkon/superluminal-nix-linux";
     delta.url = "github:zed-industries/delta-nix";
@@ -30,6 +34,7 @@
       nixos-hardware,
       home-manager,
       zed-nightly,
+      kache,
       tracy,
       superluminal,
       delta,
@@ -44,6 +49,7 @@
         specialArgs = {
           inherit
             zed-nightly
+            kache
             tracy
             superluminal
             delta
