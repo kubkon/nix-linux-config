@@ -7,7 +7,6 @@
   pkgs,
   lib,
   zed-nightly,
-  kache,
   tracy,
   superluminal,
   delta,
@@ -17,7 +16,6 @@
 
 let
   system = pkgs.stdenv.hostPlatform.system;
-  kachePackage = kache.packages.${system}.default;
   superluminalPackage = superluminal.packages.${system}.default;
   deltaTrunk = delta-trunk.packages.${system}.delta-trunk;
   deltaPackage = delta.packages.${system}.delta;
@@ -319,7 +317,6 @@ in
     btop
     gdb
     zed-nightly.packages.${system}.default
-    kachePackage
     tracy.packages.${system}.default
     superluminalPackage
     deltaTrunk
@@ -351,10 +348,6 @@ in
     XDG_CURRENT_DESKTOP = "niri";
     XDG_SESSION_TYPE = "wayland";
     XDG_SESSION_DESKTOP = "niri";
-  };
-  environment.sessionVariables = {
-    RUSTC_WRAPPER = "${kachePackage}/bin/kache";
-    PATH = [ "${kachePackage}/shims" ];
   };
 
   virtualisation = {
