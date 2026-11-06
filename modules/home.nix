@@ -438,9 +438,10 @@ in
 
   programs.ssh = {
     enable = true;
-    extraConfig = pkgs.lib.mkBefore ''
-      PKCS11Provider=${pkgs.yubico-piv-tool}/lib/libykcs11.so
-    '';
+    # SSH logins use the PIV key, which only yubikey-agent serves. The session's
+    # SSH_AUTH_SOCK stays on gnome-keyring's agent, which holds the FIDO key
+    # that git and jj sign with; ssh-keygen ignores this setting.
+    matchBlocks."*".identityAgent = "/run/user/1000/yubikey-agent/yubikey-agent.sock";
   };
 
   programs.direnv = {
