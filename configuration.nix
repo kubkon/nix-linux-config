@@ -17,7 +17,9 @@
 let
   system = pkgs.stdenv.hostPlatform.system;
   superluminalPackage = superluminal.packages.${system}.default;
-  deltaTrunk = delta-trunk.packages.${system}.delta-trunk;
+  deltaTrunk = delta-trunk.packages.${system}.delta-trunk.override {
+    withClaudeAgent = true;
+  };
   deltaPackage = delta.packages.${system}.delta;
 in
 {
