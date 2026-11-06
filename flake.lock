@@ -88,11 +88,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1793213750,
-        "narHash": "sha256-AEn+sidGsd0GVcnTZVKDxYiKZeEoqmA+aIQPUIFfnAQ=",
+        "lastModified": 1793817749,
+        "narHash": "sha256-uoHixlZnIo3hA6VGjV1zkVQEoAhI2EB4jP9nWltMy2Y=",
         "owner": "zed-industries",
         "repo": "delta-nix",
-        "rev": "6b18003d156e93c65dbd44d9087254dc616ac780",
+        "rev": "5749237bd9c9da0661e5480bcc0301968fcf039d",
         "type": "github"
       },
       "original": {
@@ -106,11 +106,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1793666943,
-        "narHash": "sha256-sSL5G6O4unm/VmttA1BuhdnlDSmTV3eubVZEv1f0g9I=",
+        "lastModified": 1793996922,
+        "narHash": "sha256-G7YLwpf2xvzHSza68kgQ/DdHRZ1r4FzSeWQXM6JHAx0=",
         "ref": "refs/heads/main",
-        "rev": "9ed237ed8441dab3a5b4736a8b2809e6a6fc8d6b",
-        "revCount": 1247,
+        "rev": "7b32d4410e730b64af76bc9c6a1478ae3682cf6a",
+        "revCount": 1266,
         "type": "git",
         "url": "ssh://git@github.com/zed-industries/delta-nix-linux"
       },
@@ -389,11 +389,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1791048980,
-        "narHash": "sha256-KgItSKML8Xvte0B7/uGnBDsYzSnnKHcOaiUbgWBXLXw=",
+        "lastModified": 1793726008,
+        "narHash": "sha256-jQp1wKvbwWdLBASTXkSi/VYmDJ5AbBi1WvcMt9HWJC8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a7868a727837f3c09cee2ce0ca671c76b1589fed",
+        "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
         "type": "github"
       },
       "original": {
@@ -731,11 +731,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1793658386,
-        "narHash": "sha256-9orYIZXebrRuKAAHRsMgCr2N+IAXY0J7vLKHwH0c0Oc=",
+        "lastModified": 1793971751,
+        "narHash": "sha256-MEbKW+EZDzwxtOo6tA9WY6bxBvo2K3RlcPwSK1l12QY=",
         "owner": "zed-industries",
         "repo": "zed",
-        "rev": "504a7f2cf25b817cda3998cab93473adef15f93c",
+        "rev": "db43f05e398036f08e544c03cbc068216c7a0aaa",
         "type": "github"
       },
       "original": {

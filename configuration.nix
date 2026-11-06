@@ -339,7 +339,7 @@ in
     cmark
     mangohud
     amdgpu_top
-    claude-code
+    nodejs
     comma
   ];
   environment.variables = {
