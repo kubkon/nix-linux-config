@@ -106,11 +106,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1793996922,
-        "narHash": "sha256-G7YLwpf2xvzHSza68kgQ/DdHRZ1r4FzSeWQXM6JHAx0=",
+        "lastModified": 1794185910,
+        "narHash": "sha256-7TGgTd2N9ZyhFZNQ9THMlYXQ/bKD8uT4rxGZJiabV4I=",
         "ref": "refs/heads/main",
-        "rev": "7b32d4410e730b64af76bc9c6a1478ae3682cf6a",
-        "revCount": 1266,
+        "rev": "d2c317413b688f9bd87dd65ebac2ae8c15892986",
+        "revCount": 1271,
         "type": "git",
         "url": "ssh://git@github.com/zed-industries/delta-nix-linux"
       },
@@ -731,11 +731,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1793971751,
-        "narHash": "sha256-MEbKW+EZDzwxtOo6tA9WY6bxBvo2K3RlcPwSK1l12QY=",
+        "lastModified": 1794168494,
+        "narHash": "sha256-AV2p+PAdd+9rtLW1zrOThdrdWQl9V2rWD96eLFvEJR0=",
         "owner": "zed-industries",
         "repo": "zed",
-        "rev": "db43f05e398036f08e544c03cbc068216c7a0aaa",
+        "rev": "d2a4fb6ded7c470be25d1541281da3882495b65b",
         "type": "github"
       },
       "original": {
