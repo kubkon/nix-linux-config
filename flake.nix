@@ -27,6 +27,10 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    amp-app = {
+      url = "github:kubkon/amp-app-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -42,6 +46,7 @@
       delta-trunk,
       niri,
       stylix,
+      amp-app,
     }:
     {
       nixosConfigurations."ichimaru" = nixpkgs.lib.nixosSystem {
@@ -54,6 +59,7 @@
             superluminal
             delta
             delta-trunk
+            amp-app
             ;
         };
 

@@ -11,6 +11,7 @@
   superluminal,
   delta,
   delta-trunk,
+  amp-app,
   ...
 }:
 
@@ -21,6 +22,7 @@ let
     withClaudeAgent = true;
   };
   deltaPackage = delta.packages.${system}.delta;
+  ampDesktop = amp-app.packages.${system}.default;
 in
 {
   imports = [
@@ -312,9 +314,6 @@ in
   environment.systemPackages = with pkgs; [
     ghostty
     helix
-    slack
-    # discord
-    zulip
     htop
     btop
     gdb
@@ -344,6 +343,8 @@ in
     nodejs
     comma
     claude-code
+    amp-cli
+    ampDesktop
   ];
   environment.variables = {
     EDITOR = "hx";
