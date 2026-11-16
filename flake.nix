@@ -11,8 +11,14 @@
     zed-nightly.url = "github:zed-industries/zed/nightly";
     tracy.url = "github:kubkon/tracy.nix";
     superluminal.url = "github:kubkon/superluminal-nix-linux";
-    delta.url = "github:zed-industries/delta-nix";
-    delta-trunk.url = "git+ssh://git@github.com/zed-industries/delta-nix-linux";
+    delta = {
+      url = "github:zed-industries/delta-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    delta-trunk = {
+      url = "git+ssh://git@github.com/zed-industries/delta-nix-linux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     niri = {
       url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";

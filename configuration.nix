@@ -343,6 +343,7 @@ in
     amdgpu_top
     nodejs
     comma
+    claude-code
   ];
   environment.variables = {
     EDITOR = "hx";
