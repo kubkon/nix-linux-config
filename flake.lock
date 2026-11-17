@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "amp-app": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794856162,
+        "narHash": "sha256-s3vYJM4PJq3E6PY09YlNEhHTs4sPWNbZ1tU/u/KOjKw=",
+        "owner": "kubkon",
+        "repo": "amp-app-nix",
+        "rev": "0f799fd1c47d8df684a6f9a51458efbf332721ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kubkon",
+        "repo": "amp-app-nix",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -110,11 +130,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794839344,
-        "narHash": "sha256-a0tXAJkCTPeawY1Ap4udE+K/rnuMc7rDO/S8W+sO1kE=",
+        "lastModified": 1794895664,
+        "narHash": "sha256-4GAxySZp4VAikO0rv9ZNAtk5UACh6jhP59LE2z0OlW0=",
         "ref": "refs/heads/main",
-        "rev": "f0002992d8848b2323fc1fa6dc751d1688d7f92a",
-        "revCount": 1314,
+        "rev": "96fb872fafa48dedd88ee744d3d53aecab73e865",
+        "revCount": 1319,
         "type": "git",
         "url": "ssh://git@github.com/zed-industries/delta-nix-linux"
       },
@@ -479,6 +499,7 @@
     },
     "root": {
       "inputs": {
+        "amp-app": "amp-app",
         "delta": "delta",
         "delta-trunk": "delta-trunk",
         "home-manager": "home-manager",
@@ -703,11 +724,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1794837556,
-        "narHash": "sha256-5EuynOnJ4S7tNHavdA+zlMuYcUlzs8IpC/BJrDSl888=",
+        "lastModified": 1794862225,
+        "narHash": "sha256-9zJItST/W771YlDZ6Nk10sm7KcoI7I75nk4lqPccpZo=",
         "owner": "zed-industries",
         "repo": "zed",
-        "rev": "52b0e43064e47b4d3d7f8ddf9d5ab8966b869925",
+        "rev": "482e76524bd33d8cbdfc352f1fef3eefbf2fad92",
         "type": "github"
       },
       "original": {
