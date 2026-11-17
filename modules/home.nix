@@ -10,9 +10,53 @@ let
   userEmail = "kubkon@jakubkonka.com";
   username = "kubkon";
   homeDirectory = "/home/kubkon";
-  signingKey = "~/.ssh/id_ecdsa_sk.pub";
   allowedSigners = "~/.ssh/allowed_signers";
   gpgFormat = "ssh";
+
+  # Signing uses whichever YubiKey is plugged in: yubikey-agent only lists the
+  # PIV key of the connected device, so no public key lives in this config.
+  yubikeyAgentSock = "/run/user/1000/yubikey-agent/yubikey-agent.sock";
+
+  # git: prints the agent's current key for gpg.ssh.defaultKeyCommand.
+  yubikeySigningKey = pkgs.writeShellApplication {
+    name = "yubikey-signing-key";
+    runtimeInputs = [ pkgs.openssh ];
+    text = ''
+      export SSH_AUTH_SOCK=${yubikeyAgentSock}
+      if ! keys=$(ssh-add -L); then
+        echo "yubikey-agent has no key; is a YubiKey plugged in?" >&2
+        exit 1
+      fi
+      printf 'key::%s\n' "''${keys%%$'\n'*}"
+    '';
+  };
+
+  # jj: it requires signing.key, so it gets a placeholder and this ssh-keygen
+  # wrapper replaces `-f <key>` on `-Y sign` with the agent's current key.
+  # Every other invocation (verify, find-principals, ...) passes through.
+  yubikeySshKeygen = pkgs.writeShellApplication {
+    name = "yubikey-ssh-keygen";
+    runtimeInputs = [ pkgs.openssh ];
+    text = ''
+      export SSH_AUTH_SOCK=${yubikeyAgentSock}
+      args=("$@")
+      sign=0
+      for ((i = 0; i + 1 < ''${#args[@]}; i++)); do
+        [ "''${args[i]}" = -Y ] && [ "''${args[i + 1]}" = sign ] && sign=1
+      done
+      if [ "$sign" -eq 0 ]; then
+        exec ssh-keygen "$@"
+      fi
+
+      keyfile=$(mktemp)
+      trap 'rm -f "$keyfile"' EXIT
+      ${lib.getExe yubikeySigningKey} | sed 's/^key:://' >"$keyfile"
+      for ((i = 0; i + 1 < ''${#args[@]}; i++)); do
+        [ "''${args[i]}" = -f ] && args[i + 1]=$keyfile
+      done
+      ssh-keygen "''${args[@]}"
+    '';
+  };
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -438,10 +482,6 @@ in
 
   programs.ssh = {
     enable = true;
-    # SSH logins use the PIV key, which only yubikey-agent serves. The session's
-    # SSH_AUTH_SOCK stays on gnome-keyring's agent, which holds the FIDO key
-    # that git and jj sign with; ssh-keygen ignores this setting.
-    matchBlocks."*".identityAgent = "/run/user/1000/yubikey-agent/yubikey-agent.sock";
   };
 
   programs.direnv = {
@@ -478,11 +518,14 @@ in
         name = userName;
         email = userEmail;
       };
-      gpg.ssh.allowedSignersFile = allowedSigners;
+      gpg.ssh = {
+        allowedSignersFile = allowedSigners;
+        defaultKeyCommand = lib.getExe yubikeySigningKey;
+      };
     };
     signing = {
       format = "ssh";
-      key = signingKey;
+      key = null;
       signByDefault = true;
     };
   };
@@ -496,8 +539,11 @@ in
       };
       signing = {
         backend = "ssh";
-        key = signingKey;
-        backends.ssh.allowed-signers = allowedSigners;
+        key = "yubikey-agent"; # placeholder, see yubikeySshKeygen
+        backends.ssh = {
+          allowed-signers = allowedSigners;
+          program = lib.getExe yubikeySshKeygen;
+        };
         behavior = "drop";
       };
       git.sign-on-push = true;
